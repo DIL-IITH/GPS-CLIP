@@ -809,7 +809,7 @@
     var left = acc / smax * 100, w = r[2] / smax * 100; acc += r[2]; if (r[3]) design += r[2];
     st.insertAdjacentHTML("beforeend", '<div class="st-row"><div class="lab">' + r[0] + '<small>' + r[1] + '</small></div><div class="st-track">' + (left > 0 ? '<div class="st-bar" style="left:0;width:' + left + '%;background:var(--pos-tint)"></div>' : '') + '<div class="st-bar" style="left:' + left + '%;width:' + w + '%;background:var(--pos)"></div></div><div class="st-val">+' + r[2].toFixed(2) + '</div></div>');
   });
-  st.insertAdjacentHTML("beforeend", '<div class="st-row st-total"><div class="lab"><b>Region-loss total</b><small>last three steps, 41.88 → 46.44</small></div><div></div><div class="st-val">+' + design.toFixed(2) + '</div></div>');
+  st.insertAdjacentHTML("beforeend", '<div class="st-row st-total"><div class="lab"><b>Total</b><small>41.88 → 46.44</small></div><div></div><div class="st-val">+' + design.toFixed(2) + '</div></div>');
 
   /* Results, Table 1 (CLIP ViT-B/32 vs GPS-CLIP) */
   var RES = {
