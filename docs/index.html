@@ -603,7 +603,7 @@
 
     <div class="stairs-wrap">
       <h3>Where the gain comes from</h3>
-      <p class="note" style="margin-top:0">Average points gained as each part of the region loss is added, starting from a plain single-positive region loss (Table 25).</p>
+      <p class="note" style="margin-top:0">Average points gained at each step. Adding the scene-graph data with a standard loss barely helps (Table 28); the gain comes from how the region loss uses it (Table 25).</p>
       <div class="stairs" id="stairs"></div>
     </div>
   </section>
@@ -803,13 +803,13 @@
   slide.addEventListener("input", updIoU); updIoU();
 
   /* Ablation staircase */
-  var S = [["+ Mask same-image pairs", "no false negatives", 1.46], ["+ Overlaps as positives", "equal weights", 0.36], ["+ IoU weighting", "weighted by overlap", 2.74]];
-  var st = document.getElementById("stairs"), acc = 0, smax = 1.46 + 0.36 + 2.74;
+  var S = [["Add scene-graph data", "standard loss", 0.27, false], ["+ Mask same-image pairs", "no false negatives", 1.46, true], ["+ Overlaps as positives", "equal weights", 0.36, true], ["+ IoU weighting", "weighted by overlap", 2.74, true]];
+  var st = document.getElementById("stairs"), acc = 0, design = 0, smax = 0.27 + 1.46 + 0.36 + 2.74;
   S.forEach(function (r) {
-    var left = acc / smax * 100, w = r[2] / smax * 100; acc += r[2];
+    var left = acc / smax * 100, w = r[2] / smax * 100; acc += r[2]; if (r[3]) design += r[2];
     st.insertAdjacentHTML("beforeend", '<div class="st-row"><div class="lab">' + r[0] + '<small>' + r[1] + '</small></div><div class="st-track">' + (left > 0 ? '<div class="st-bar" style="left:0;width:' + left + '%;background:var(--pos-tint)"></div>' : '') + '<div class="st-bar" style="left:' + left + '%;width:' + w + '%;background:var(--pos)"></div></div><div class="st-val">+' + r[2].toFixed(2) + '</div></div>');
   });
-  st.insertAdjacentHTML("beforeend", '<div class="st-row st-total"><div class="lab"><b>Total</b><small>41.88 → 46.44 avg.</small></div><div></div><div class="st-val">+' + acc.toFixed(2) + '</div></div>');
+  st.insertAdjacentHTML("beforeend", '<div class="st-row st-total"><div class="lab"><b>Region-loss total</b><small>last three steps, 41.88 → 46.44</small></div><div></div><div class="st-val">+' + design.toFixed(2) + '</div></div>');
 
   /* Results, Table 1 (CLIP ViT-B/32 vs GPS-CLIP) */
   var RES = {
