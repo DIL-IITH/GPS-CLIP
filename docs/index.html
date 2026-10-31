@@ -559,15 +559,15 @@
 
     <div class="eqn" role="group" aria-label="Training objective">
       <i>ℒ</i> =
-      <span class="eqp"><span class="lam">λ<sub>region</sub></span> <button class="term" type="button" data-t="0" aria-pressed="false" style="background:var(--c-sub)"><i>ℒ</i><sub>region</sub></button></span>
-      + <span class="eqp"><span class="lam">λ<sub>relation</sub></span> <button class="term" type="button" data-t="1" aria-pressed="false" style="background:var(--c-triplet)"><i>ℒ</i><sub>relation</sub></button></span>
-      + <span class="eqp"><span class="lam">λ<sub>global</sub></span> <button class="term" type="button" data-t="2" aria-pressed="false" style="background:var(--c-caption)"><i>ℒ</i><sub>global</sub></button></span>
+      <span class="eqp"><span class="lam">λ<sub>global</sub></span> <button class="term" type="button" data-t="0" aria-pressed="false" style="background:var(--c-caption)"><i>ℒ</i><sub>global</sub></button></span>
+      + <span class="eqp"><span class="lam">λ<sub>region</sub></span> <button class="term" type="button" data-t="1" aria-pressed="false" style="background:var(--c-sub)"><i>ℒ</i><sub>region</sub></button></span>
+      + <span class="eqp"><span class="lam">λ<sub>relation</sub></span> <button class="term" type="button" data-t="2" aria-pressed="false" style="background:var(--c-triplet)"><i>ℒ</i><sub>relation</sub></button></span>
     </div>
     <p class="eq-hint">Click a term to focus on it.</p>
     <div class="eq-explain" id="eqx">
+      <div class="eq-card"><b><em style="background:var(--c-caption)"></em>Global</b>The standard image–caption contrastive loss. Kept as is, so zero-shot ability is preserved.</div>
       <div class="eq-card"><b><em style="background:var(--c-sub)"></em>Region</b>Image sub-regions are matched to their text spans. Overlapping regions count as weighted positives instead of being pushed apart.</div>
       <div class="eq-card"><b><em style="background:var(--c-triplet)"></em>Relation</b>Each image is aligned with its ⟨s, r, o⟩ triplets. Order matters: "dog chasing frisbee" is not "frisbee chasing dog".</div>
-      <div class="eq-card"><b><em style="background:var(--c-caption)"></em>Global</b>The standard image–caption contrastive loss. Kept as is, so zero-shot ability is preserved.</div>
     </div>
   </section>
 
