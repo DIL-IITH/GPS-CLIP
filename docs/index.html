@@ -326,6 +326,8 @@
   .eqn .term:hover, .eqn .term[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); }
   .eqn sub { font-size: .55em; font-family: var(--sans); }
   .eqn .lam { color: var(--muted); font-size: .8em; }
+  .eqn .eqp { white-space: nowrap; }
+  @media (max-width: 560px) { .eqn { white-space: normal; line-height: 2.1; } }
   .eq-explain { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
   .eq-card { padding: 16px 18px; border-radius: 12px; background: var(--sheet); box-shadow: 0 0 0 1px var(--rule); font-size: 16px; line-height: 1.55; color: var(--muted); transition: opacity .2s; }
   .eq-card b { font-family: var(--sans); display: flex; gap: 10px; align-items: center; font-size: 18px; font-weight: 600; margin-bottom: 4px; color: var(--ink); }
@@ -557,12 +559,9 @@
 
     <div class="eqn" role="group" aria-label="Training objective">
       <i>ℒ</i> =
-      <span class="lam">λ<sub>global</sub></span>
-      <button class="term" type="button" data-t="0" aria-pressed="false" style="background:var(--c-caption)"><i>ℒ</i><sub>global</sub></button>
-      + <span class="lam">λ<sub>r</sub></span>
-      <button class="term" type="button" data-t="1" aria-pressed="false" style="background:var(--c-sub)"><i>ℒ</i><sub>region</sub></button>
-      + <span class="lam">λ<sub>t</sub></span>
-      <button class="term" type="button" data-t="2" aria-pressed="false" style="background:var(--c-triplet)"><i>ℒ</i><sub>relation</sub></button>
+      <span class="eqp"><span class="lam">λ<sub>region</sub></span> <button class="term" type="button" data-t="1" aria-pressed="false" style="background:var(--c-sub)"><i>ℒ</i><sub>region</sub></button></span>
+      + <span class="eqp"><span class="lam">λ<sub>relation</sub></span> <button class="term" type="button" data-t="2" aria-pressed="false" style="background:var(--c-triplet)"><i>ℒ</i><sub>relation</sub></button></span>
+      + <span class="eqp"><span class="lam">λ<sub>global</sub></span> <button class="term" type="button" data-t="0" aria-pressed="false" style="background:var(--c-caption)"><i>ℒ</i><sub>global</sub></button></span>
     </div>
     <p class="eq-hint">Click a term to focus on it.</p>
     <div class="eq-explain" id="eqx">
