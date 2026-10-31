@@ -473,7 +473,7 @@
   <div class="tldr">
     <p class="tldr-text" style="margin:0"><span class="tag">TL;DR</span>Instead of training CLIP to reject edited captions, GPS-CLIP pulls each image toward its own regions and relation triplets. Same encoder at inference, no extra cost.</p>
     <div class="stats">
-      <div class="stat"><b>+11.5</b><span>SugarCrepe avg</span><small>71.8 → 83.3</small></div>
+      <div class="stat"><b>+10.4</b><span>SugarCrepe avg</span><small>72.9 → 83.3</small></div>
       <div class="stat"><b>+8.3</b><span>Retrieval R@1</span><small>54.7 → 62.9</small></div>
       <div class="stat"><b>+7.8</b><span>COLA</span><small>22.9 → 30.6</small></div>
       <div class="stat"><b>+2.2</b><span>ImageNetV2</span><small>56.0 → 58.1</small></div>
@@ -813,7 +813,7 @@
 
   /* Results, Table 1 (CLIP ViT-B/32 vs GPS-CLIP) */
   var RES = {
-    comp: [["SugarCrepe", "average", 71.77, 83.30], ["SugarCrepe++", "average", 55.88, 65.62], ["COLA", "multi-object binding", 22.86, 30.64], ["What'sUp", "spatial relations", 41.77, 47.38], ["Winoground", "average", 16.40, 18.35], ["MMVP-VLM", "fine-grained perception", 27.42, 33.33]],
+    comp: [["SugarCrepe", "average", 72.90, 83.30], ["SugarCrepe++", "average", 54.60, 65.62], ["COLA", "multi-object binding", 22.86, 30.64], ["What'sUp", "spatial relations", 41.77, 47.38], ["Winoground", "average", 16.40, 18.35], ["MMVP-VLM", "fine-grained perception", 27.42, 33.33]],
     gen: [["ImageNetV2", "zero-shot top-1", 55.96, 58.11], ["Retrieval", "COCO + Flickr30k, R@1", 54.67, 62.92]]
   };
   var gbars = document.getElementById("gbars"), resTabs = document.querySelectorAll("#resTabs button");
