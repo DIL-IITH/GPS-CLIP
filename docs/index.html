@@ -327,7 +327,7 @@
   .eqn sub { font-size: .55em; font-family: var(--sans); }
   .eqn .lam { color: var(--muted); font-size: .8em; }
   .eqn .eqp { white-space: nowrap; }
-  @media (max-width: 560px) { .eqn { white-space: normal; line-height: 2.1; } }
+  @media (max-width: 560px) { .eqn { font-size: min(22px, calc(5vw - 3px)); padding-left: 8px; padding-right: 8px; } .eqn .term { padding: 2px .4em 4px; } }
   .eq-explain { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
   .eq-card { padding: 16px 18px; border-radius: 12px; background: var(--sheet); box-shadow: 0 0 0 1px var(--rule); font-size: 16px; line-height: 1.55; color: var(--muted); transition: opacity .2s; }
   .eq-card b { font-family: var(--sans); display: flex; gap: 10px; align-items: center; font-size: 18px; font-weight: 600; margin-bottom: 4px; color: var(--ink); }
