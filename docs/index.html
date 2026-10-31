@@ -347,6 +347,7 @@
   .readout { font-family: var(--sans); margin: 16px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; align-items: baseline; }
   .readout dt { color: var(--muted); font-size: 14.5px; }
   .readout dd { margin: 0; font-weight: 700; font-size: 20px; font-variant-numeric: tabular-nums; }
+  .iou-hint { font-family: var(--sans); font-size: 14px; color: var(--muted); line-height: 1.5; margin: 14px 0 0; }
   .pill { display: inline-block; font-size: 14px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
   .pill.neg { background: var(--neg-tint); color: var(--neg); }
   .pill.pos { background: var(--pos-tint); color: var(--pos); }
@@ -566,7 +567,7 @@
     <p class="eq-hint">Click a term to focus on it.</p>
     <div class="eq-explain" id="eqx">
       <div class="eq-card"><b><em style="background:var(--c-caption)"></em>Global</b>The standard image–caption contrastive loss. Kept as is, so zero-shot ability is preserved.</div>
-      <div class="eq-card"><b><em style="background:var(--c-sub)"></em>Region</b>Image sub-regions are matched to their text spans. Overlapping regions count as weighted positives instead of being pushed apart.</div>
+      <div class="eq-card"><b><em style="background:var(--c-sub)"></em>Region</b>Image sub-regions are matched to their text spans. Regions that overlap enough (IoU ≥ 0.5) count as weighted positives instead of being pushed apart.</div>
       <div class="eq-card"><b><em style="background:var(--c-triplet)"></em>Relation</b>Each image is aligned with its ⟨s, r, o⟩ triplets. Order matters: "dog chasing frisbee" is not "frisbee chasing dog".</div>
     </div>
   </section>
@@ -581,7 +582,6 @@
       <figcaption><b>IoU-weighted region–phrase loss.</b> Pairs of regions from the same image are weighted by how much they overlap, instead of all being treated as negatives.</figcaption>
     </figure>
 
-    <!-- TODO: check the threshold and weighting rule in the script against the paper's region-loss definition -->
     <div class="iou">
       <svg viewBox="0 0 360 220" role="img" aria-label="Two region boxes overlapping">
         <rect class="bx-a" x="60" y="50" width="130" height="120" rx="6"/>
@@ -598,6 +598,7 @@
           <dt>Standard loss</dt><dd><span class="pill neg">negative</span></dd>
           <dt>GPS-CLIP</dt><dd id="gps"></dd>
         </dl>
+        <p class="iou-hint">GPS-CLIP treats B as a positive once IoU reaches 0.5. Below that it is masked, so it is never pushed apart.</p>
       </div>
     </div>
 
@@ -786,7 +787,7 @@
     });
   });
 
-  /* IoU demo (illustrative rule: overlap > 0 → positive weighted by IoU; no overlap → masked) */
+  /* IoU demo: same-image region is a positive when IoU >= tau_pos (0.5), otherwise masked (Eq. 2, App. C.2) */
   var BA = { x: 60, y: 50, w: 130, h: 120 }, BB = { y: 70, w: 130, h: 110 };
   var slide = document.getElementById("slide"), bbox = document.getElementById("bbox"), ibox = document.getElementById("ibox"), blab = document.getElementById("blab");
   var iouv = document.getElementById("iouv"), gps = document.getElementById("gps");
@@ -798,7 +799,7 @@
     var iou = inter / (BA.w * BA.h + BB.w * BB.h - inter);
     ibox.setAttribute("x", ix); ibox.setAttribute("y", iy); ibox.setAttribute("width", iw); ibox.setAttribute("height", ih);
     iouv.textContent = iou.toFixed(2);
-    gps.innerHTML = iou > 0 ? '<span class="pill pos">positive · weight ' + iou.toFixed(2) + '</span>' : '<span class="pill mask">masked (same image)</span>';
+    gps.innerHTML = iou >= 0.5 ? '<span class="pill pos">positive</span>' : '<span class="pill mask">masked (same image)</span>';
   }
   slide.addEventListener("input", updIoU); updIoU();
 
